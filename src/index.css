@@ -1,0 +1,252 @@
+/* ==========================================================================
+   DESIGN TOKENS
+   --------------------------------------------------------------------------
+   Every color, font and spacing value the app uses lives here as a CSS
+   "variable" (custom property). If you want to re-skin the whole app,
+   this is the ONLY section you usually need to touch.
+
+   How it works:
+   - `:root` holds the default theme ("Misty Peaks").
+   - Each `[data-theme="..."]` block below OVERRIDES those same variable
+     names with different colors. The <html> tag gets a `data-theme`
+     attribute from ThemeSwitcher.jsx, and the whole app instantly re-colors
+     itself because every component reads colors from these variables
+     instead of hard-coded hex codes.
+   - `--color-glass` is the translucent "frosted glass" tone used by the
+     top bar, composer, chat bubbles, and suggestion chips in App.css —
+     it lets the wallpaper behind them stay visible while keeping text
+     readable. See App.css for the wallpaper + backdrop-filter rules.
+   - Want a 4th theme? Copy one of the blocks, rename it, tweak the colors,
+     add a wallpaper rule in App.css, then add a matching entry in
+     `src/data/themes.js`.
+   ========================================================================== */
+
+:root {
+  /* --- Fonts ------------------------------------------------------------ */
+  --font-display: 'Baloo 2', system-ui, sans-serif; /* bubbly, used for headings/logo */
+  --font-body: 'Nunito', system-ui, sans-serif; /* soft, used for everyday text */
+
+  /* --- Misty Peaks theme (default): calm mountain teal + sky blue ------- */
+  /* Inspired by wallpapers/misty-peaks.jpg — a quiet overlook at dawn.   */
+  --color-bg: #eaf7f6;
+  --color-surface: #ffffff;
+  --color-sidebar-start: #bfe8e3;
+  --color-sidebar-end: #9cc9ef;
+  --color-accent: #2ec4b6;
+  --color-accent-2: #4f9ddb;
+  --color-accent-3: #f4c95d;
+  --color-text: #24333a;
+  --color-text-soft: #5f7a82;
+  --color-border: #cfeae7;
+  --color-bubble-user-start: #4f9ddb;
+  --color-bubble-user-end: #2ec4b6;
+  --color-bubble-bot: rgba(255, 255, 255, 0.62);
+  --color-bubble-user-text: #ffffff;
+  --color-bubble-bot-text: #24333a;
+  --color-glass: rgba(255, 255, 255, 0.58);
+  --color-glass-strong: rgba(255, 255, 255, 0.8);
+  --wallpaper-tint-top: rgba(234, 247, 246, 0.35);
+  --wallpaper-tint-bottom: rgba(234, 247, 246, 0.6);
+
+  /* --- Shared spacing / shape scale (same across every theme) ----------- */
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 24px;
+  --radius-pill: 999px;
+  --shadow-soft: 0 4px 16px rgba(155, 126, 222, 0.16);
+  --shadow-lift: 0 10px 30px rgba(155, 126, 222, 0.28);
+  --transition-fast: 150ms ease;
+  --transition-bouncy: 220ms cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* --- Blood Moon theme: crimson + ember + violet, dramatic night mode --- */
+/* Inspired by wallpapers/blood-moon.jpg — the split-face crimson close-up. */
+[data-theme='bloodmoon'] {
+  --color-bg: #0d0508;
+  --color-surface: #1a0a0d;
+  --color-sidebar-start: #05010a;
+  --color-sidebar-end: #4a0e14;
+  --color-accent: #e63946;
+  --color-accent-2: #ff6b4a;
+  --color-accent-3: #8e5df5;
+  --color-text: #f5e9e5;
+  --color-text-soft: #c79a94;
+  --color-border: #3a1116;
+  --color-bubble-user-start: #e63946;
+  --color-bubble-user-end: #8e5df5;
+  --color-bubble-bot: rgba(20, 8, 12, 0.55);
+  --color-bubble-user-text: #ffffff;
+  --color-bubble-bot-text: #f5e9e5;
+  --color-glass: rgba(15, 5, 9, 0.5);
+  --color-glass-strong: rgba(15, 5, 9, 0.72);
+  --wallpaper-tint-top: rgba(13, 5, 8, 0.3);
+  --wallpaper-tint-bottom: rgba(13, 5, 8, 0.68);
+  --shadow-soft: 0 4px 18px rgba(0, 0, 0, 0.45);
+  --shadow-lift: 0 10px 32px rgba(230, 57, 70, 0.35);
+}
+
+/* --- Flame Hashira theme: bold flame orange + gold, high energy ------- */
+/* Inspired by wallpapers/flame-hashira.jpg — the fire-duel scene.       */
+[data-theme='flame'] {
+  --color-bg: #1a1008;
+  --color-surface: #241a10;
+  --color-sidebar-start: #241505;
+  --color-sidebar-end: #b0430f;
+  --color-accent: #ff7a00;
+  --color-accent-2: #ffc93c;
+  --color-accent-3: #d62828;
+  --color-text: #fdf3e7;
+  --color-text-soft: #d9b08c;
+  --color-border: #4a2a12;
+  --color-bubble-user-start: #ff7a00;
+  --color-bubble-user-end: #d62828;
+  --color-bubble-bot: rgba(30, 18, 10, 0.55);
+  --color-bubble-user-text: #1a1008;
+  --color-bubble-bot-text: #fdf3e7;
+  --color-glass: rgba(28, 15, 6, 0.5);
+  --color-glass-strong: rgba(28, 15, 6, 0.75);
+  --wallpaper-tint-top: rgba(26, 16, 8, 0.28);
+  --wallpaper-tint-bottom: rgba(26, 16, 8, 0.62);
+  --shadow-soft: 0 4px 18px rgba(0, 0, 0, 0.45);
+  --shadow-lift: 0 10px 32px rgba(255, 122, 0, 0.35);
+}
+
+/* ==========================================================================
+   RESET & BASE STYLES
+   ========================================================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+p {
+  margin: 0;
+}
+
+button {
+  font-family: var(--font-body);
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+textarea {
+  font-family: var(--font-body);
+}
+
+/* A visible, friendly focus ring for keyboard users (accessibility). */
+button:focus-visible,
+textarea:focus-visible,
+input:focus-visible {
+  outline: 3px solid var(--color-accent-3);
+  outline-offset: 2px;
+}
+
+/* Thin, theme-colored scrollbars (Chrome/Edge/Safari). */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-accent-2) transparent;
+}
+*::-webkit-scrollbar {
+  width: 8px;
+}
+*::-webkit-scrollbar-thumb {
+  background: var(--color-accent-2);
+  border-radius: var(--radius-pill);
+}
+
+/* ==========================================================================
+   SHARED "BUTTON" HOVER/PRESS EFFECT
+   --------------------------------------------------------------------------
+   Add class="pop-hover" to any clickable element to get a gentle
+   grow-on-hover / shrink-on-click bounce. This is the main interactive
+   feel used across the whole app.
+   ========================================================================== */
+.pop-hover {
+  transition: transform var(--transition-bouncy), box-shadow var(--transition-fast),
+    background var(--transition-fast), color var(--transition-fast);
+}
+.pop-hover:hover {
+  transform: translateY(-2px) scale(1.03);
+}
+.pop-hover:active {
+  transform: translateY(0) scale(0.97);
+}
+
+/* Respect users who prefer less motion: turn off decorative animation. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* ==========================================================================
+   FALLING PETALS / EMBERS (decorative background animation)
+   Used by src/components/SakuraPetals.jsx — the colors it draws from
+   (--color-accent / -2 / -3) already change per theme, so this becomes
+   drifting embers on Flame Hashira and drifting motes on Blood Moon for
+   free, with no extra code.
+   ========================================================================== */
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-10%) translateX(0) rotate(0deg);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(110vh) translateX(var(--drift, 40px)) rotate(360deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes bob {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+@keyframes bounce-dot {
+  0%,
+  80%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.5;
+  }
+  40% {
+    transform: translateY(-6px);
+    opacity: 1;
+  }
+}

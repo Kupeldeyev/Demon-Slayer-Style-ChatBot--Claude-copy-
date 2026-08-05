@@ -1,0 +1,15 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="flame" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#D62828" />
+      <stop offset="55%" stop-color="#FF7A00" />
+      <stop offset="100%" stop-color="#FFC93C" />
+    </linearGradient>
+  </defs>
+  <!-- a simple flame/blade-edge silhouette, echoing the fire-duel wallpaper -->
+  <path
+    d="M32 4c6 10-4 14-4 22 0 5 4 8 4 8s4-3 4-8c0-4-2-7-1-11 6 5 11 13 11 21 0 12-9 22-14 22s-14-10-14-22c0-11 8-19 14-32z"
+    fill="url(#flame)"
+  />
+  <circle cx="32" cy="42" r="5" fill="#FFF6E5" opacity="0.85" />
+</svg>

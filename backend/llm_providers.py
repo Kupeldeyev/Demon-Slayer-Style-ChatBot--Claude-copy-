@@ -202,7 +202,7 @@ async def gemini_chat(
         "contents": _to_gemini_contents(messages),
     }
     if tools:
-        body["tools"] = [{"function_declarations": tools}]
+        body["tools"] = [{"functionDeclarations": tools}]
 
     url = GEMINI_API_URL.format(model=GEMINI_MODEL)
 

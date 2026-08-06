@@ -234,6 +234,96 @@
 }
 
 /* ==========================================================================
+   MARKDOWN FORMATTING (assistant messages)
+   --------------------------------------------------------------------------
+   Rendered by src/utils/markdown.jsx and applied inside .bubble--bot.
+   Keeps everything comfortably readable inside a narrow chat bubble
+   rather than looking like a full document.
+   ========================================================================== */
+.md-paragraph {
+  margin: 0;
+}
+.md-paragraph + .md-paragraph,
+.bubble--bot > * + * {
+  margin-top: 10px;
+}
+
+.md-heading {
+  font-family: var(--font-display);
+  line-height: 1.3;
+  margin: 0;
+}
+h4.md-heading {
+  font-size: 17px;
+}
+h5.md-heading {
+  font-size: 15.5px;
+}
+h6.md-heading {
+  font-size: 14.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  color: var(--color-text-soft);
+}
+
+.md-list {
+  margin: 0;
+  padding-left: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.md-list li {
+  padding-left: 2px;
+}
+
+.md-quote {
+  margin: 0;
+  padding: 2px 0 2px 12px;
+  border-left: 3px solid var(--color-accent-2);
+  color: var(--color-text-soft);
+  font-style: italic;
+}
+
+.md-inline-code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  font-size: 0.9em;
+  background: rgba(155, 126, 222, 0.14);
+  border-radius: 5px;
+  padding: 1px 6px;
+}
+
+.md-code-block {
+  margin: 0;
+  padding: 12px 14px;
+  border-radius: var(--radius-sm);
+  background: rgba(0, 0, 0, 0.06);
+  overflow-x: auto;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.md-code-block code {
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, monospace;
+  white-space: pre;
+}
+/* On dark themes, a light-on-dark tint reads better than the default
+   black-tinted overlay used on the light Sakura theme. */
+[data-theme='yugen'] .md-code-block,
+[data-theme='shonen'] .md-code-block {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.md-link {
+  color: var(--color-accent-2);
+  font-weight: 700;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.md-link:hover {
+  color: var(--color-accent);
+}
+
+/* ==========================================================================
    WELCOME HERO (empty state)
    --------------------------------------------------------------------------
    Sits directly over the wallpaper with no card behind it, so its title

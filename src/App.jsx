@@ -83,7 +83,7 @@ export default function App() {
     setDraft('')
     setIsTyping(true)
 
-    const replyText = await getAssistantReply(text)
+    const replyText = await getAssistantReply(text, activeChat ? activeChat.messages : [])
     const assistantMessage = { id: crypto.randomUUID(), role: 'assistant', text: replyText }
 
     setChats((prev) =>

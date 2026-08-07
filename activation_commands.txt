@@ -1,0 +1,8 @@
+# Paste following commands into the terminal
+
+# to run frontend
+npm run dev
+
+# to run backend (aka turn on MCP)
+cd backend
+uvicorn main:app --reload --port 8000

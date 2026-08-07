@@ -14,6 +14,7 @@ any LLM or HTTP code.
 
 from __future__ import annotations
 
+import sys
 import logging
 from contextlib import AsyncExitStack
 from pathlib import Path
@@ -64,12 +65,9 @@ class MCPManager:
         await manager.close()
     """
 
-    def __init__(self, server_script: str | Path = "weather.py", python_executable: str = "python3"):
+    def __init__(self, server_script: str | Path = "weather.py", python_executable: str | None = None):
         self.server_script = str(Path(server_script).resolve())
-        self.python_executable = python_executable
-
-        self.session: ClientSession | None = None
-        self.tools: list[MCPTool] = []
+        self.python_executable = python_executable or sys.executable
 
         # AsyncExitStack lets us open the stdio transport + ClientSession
         # (both of which are async context managers) and keep them alive
